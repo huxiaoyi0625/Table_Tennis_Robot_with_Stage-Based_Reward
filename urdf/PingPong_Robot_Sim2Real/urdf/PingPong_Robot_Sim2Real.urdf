@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="PingPong_Robot_Sim2Real">
+  <link
+    name="PingPong_Table">
+    <inertial>
+      <origin
+        xyz="0.00013537 -1.9788E-17 0.69623"
+        rpy="0 0 0" />
+      <mass
+        value="142.46" />
+      <inertia
+        ixx="32.965"
+        ixy="7.2363E-15"
+        ixz="0.0098588"
+        iyy="93.627"
+        iyz="-6.4104E-15"
+        izz="120.17" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/PingPong_Table.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0.16471 0.37647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.38"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="2.75 1.535 0.76"/>
+        <!--真实数据: x:2.74m y:1.525m z:0.76m 乒乓桌长宽仿真扩大1cm，高度不变-->
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="Net">
+    <inertial>
+      <origin
+        xyz="3.9601E-07 -0.011118 0.00084082"
+        rpy="0 0 0" />
+      <mass
+        value="1.361" />
+      <inertia
+        ixx="0.073011"
+        ixy="-1.1072E-08"
+        ixz="1.1556E-08"
+        iyy="0.0015918"
+        iyz="-0.00011677"
+        izz="0.071562" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Net.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.07625"
+        rpy="0 0 0" />
+      <!--
+      <geometry>
+        <box size="0.006 1.84 0.218"/>
+      </geometry>--><!--算上把网支起来的部分-->  
+      <geometry>
+        <box size="0.006 1.525 0.1525"/><!--机械臂碰不到网，因此碰撞体积设置较为简单,网高15.25cm可以设置更高一些-->
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Table_Net"
+    type="fixed">
+    <origin
+      xyz="0 0 0.760000000000011"
+      rpy="0 0 0" />
+    <parent
+      link="PingPong_Table" />
+    <child
+      link="Net" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="PingPong_Base_1">
+    <inertial>
+      <origin
+        xyz="1.3956 -3.4397E-08 0.68425"
+        rpy="0 0 0" />
+      <mass
+        value="59.788" />
+      <inertia
+        ixx="1.8507"
+        ixy="-3.629E-09"
+        ixz="3.0027E-05"
+        iyy="10.84"
+        iyz="-4.1292E-08"
+        izz="11.727" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/PingPong_Rail_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="1.378 0 0.3465"
+        rpy="0 0 0" />
+      <!--x:0.592+1.572/2 y:0 z:0.693/2数据来自下方设置的仿真碰撞体积"-->
+      <geometry>
+        <box size="1.572 1.8945 0.693"/>
+        <!--真实数据: x:156.2cm y:188.45cm z:68.3cm 仿真扩大1cm-->
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="PingPong_Base_2">
+    <collision>
+      <origin
+        xyz="1.4015 0.922 0.4175"
+        rpy="0 0 0" />
+      <!--x:0.4665+1.86/2 y:1.525/2+0.184+0.044-0.137/2 z:0.835/2数据来自下方设置的仿真碰撞体积"-->
+      <geometry>
+        <box size="1.87 0.137 0.835"/>
+        <!--真实数据: x:186cm y:10cm-1.7cm+4.4cm=12.7cm z:82.9cm 长宽扩大1cm 高度扩大0.6cm-->
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Base1_Base2"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="PingPong_Base_1" />
+    <child
+      link="PingPong_Base_2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="PingPong_Base_3">
+    <collision>
+      <origin
+        xyz="1.4015 -0.9275 0.4175"
+        rpy="0 0 0" />
+      <!--x:0.4665+1.87/2 y:1.525/2+0.184+0.055-0.148/2 z:0.835/2数据来自下方设置的仿真碰撞体积"-->
+      <geometry>
+        <box size="1.87 0.148 0.835"/>
+        <!--真实数据: x:186cm y:10cm-1.7cm+5.5cm=13.8cm z:82.9cm 长宽扩大1cm 高度扩大0.6cm-->
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Base2_Base3"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="PingPong_Base_2" />
+    <child
+      link="PingPong_Base_3" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <joint
+    name="Net_Base"
+    type="fixed">
+    <origin
+      xyz="0 0 -0.760000000000011"
+      rpy="0 0 0" />
+    <parent
+      link="Net" />
+    <child
+      link="PingPong_Base_1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="PingPong_Rail_2">
+    <inertial>
+      <origin
+        xyz="0.00028359 0.68331 0.096996"
+        rpy="0 0 0" />
+      <mass
+        value="7.3709" />
+      <inertia
+        ixx="1.8503"
+        ixy="8.3144E-07"
+        ixz="-4.2964E-09"
+        iyy="0.0033504"
+        iyz="-3.5128E-06"
+        izz="1.8513" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/PingPong_Rail_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.05275 0.67 0.1085"
+        rpy="0 0 0" /> 
+      <!--x:0.16/2-0.0445/2-0.005 y:1.525+0.285-2.28/2 z:13.5cm-5.3cm/2部分数据来自下方设置的仿真碰撞体积"-->
+      <geometry>
+	<box size="0.16 2.28 0.059"/> 
+        <!--真实数据: x:15.5cm+0.5cm =16cm y:212.6cm+14.4cm=227cm z:6.2cm(算上放坦克链的支架的底部突出部分) z: 5.3cm（完全不考虑坦克链支架） 长宽扩大1cm 高度扩大0.6cm-->
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Prismatic_1"
+    type="prismatic">
+    <origin
+      xyz="1.37 -0.7625 0.76000000000001"
+      rpy="0 0 0" />
+    <parent
+      link="PingPong_Base_3" />
+    <child
+      link="PingPong_Rail_2" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.735"
+      upper="0.765"
+      effort="366.88046699"
+      velocity="2" />
+      <!--76.8cm-->
+      <!--73.65cm-->
+      <!--0.24*3*2=1.44Nm--><!--电机堵转扭矩2.42Nm，空载转速7580转每分，额定扭矩0.177Nm，额定转速6940转每分，有效功率136.5W-->
+      <!--x轴电机转一圈移动24.661402436mm（已考虑减速比）-->
+  </joint>
+  <!--
+  <link
+    name="Arm_Base_2">
+    <collision>
+      <origin
+        xyz="0.162625 0 0.109"
+        rpy="0 0 0" />
+        -->
+      <!--x:0.267-0.06-0.08875/2 =0.162625 y:0 z:0.1085-0.059/2+0.06/2=0.109 依据Arm_Base_2和PingPong_Rail_2计算得到-->
+      <!--
+      <geometry>
+        <box size="0.08875 0.13 0.06"/>-->
+        <!--x:26.7cm-6cm-22.95cm/2=9.225cm y:13cm z:0.059/2+0.1765-0.1085-0.075/2=0.06 依据Arm_Base_2和PingPong_Rail_2计算得到-->
+        <!--通过上述计算得到的数据，在x轴方向，因此要把x轴的碰撞体积缩小3.5mm 同时对中心点进行一定程度的迁移，最终得到 origin_x:0.267-0.06-0.08875/2 =0.162625 box_x:0.09225-0.0035=0.08875-->
+        <!--
+      </geometry>
+    </collision>
+  </link>-->
+  <link
+    name="Arm_Base_1">
+    <inertial>
+      <origin
+        xyz="-0.00027887 0.00050553 0.15944"
+        rpy="0 0 0" />
+      <mass
+        value="1.9391" />
+      <inertia
+        ixx="0.0022937"
+        ixy="3.9648E-10"
+        ixz="-7.6732E-06"
+        iyy="0.0023047"
+        iyz="5.1071E-09"
+        izz="0.0041009" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.035 0 0.1765"
+        rpy="0 0 0" />
+      <!--x:0.19/2-0.06 y:0 z:13.9cm+7.5cm/2部分数据来自下方设置的仿真碰撞体积"-->
+      <geometry>
+        <box size="0.195 0.13 0.075"/>
+        <!--真实数据: x:19cm y:12cm z:7.1cm 长宽扩大1cm 高度扩大0.4cm-->
+      </geometry>
+    </collision>
+  </link>
+  <!--
+  <joint
+    name="Arm_Base_1_Arm_Base_2"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Arm_Base_1" />
+    <child
+      link="Arm_Base_2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>-->
+  <joint
+    name="Prismatic_2"
+    type="prismatic">
+    <origin
+      xyz="0 0.7625 0"
+      rpy="0 0 0" /><!-- z方向应手动添加-0.01是由于垫着导轨2的转接板存在1mm误差导致的(模型为10mm，实际为9mm，导致仿真中机器人剩下的link会抬升1mm，此处为省事不修改了，防止出现其他bug)-->
+    <parent
+      link="PingPong_Rail_2" />
+    <child
+      link="Arm_Base_1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.965"
+      upper="0.87"
+      effort="254.77825547"
+      velocity="2" />
+    <!--87.05cm-->
+    <!--96.8cm-->
+    <!--y轴电机转一圈移动29.593665106mm-->
+  </joint>
+  <link
+    name="Arm_Link_2">
+    <inertial>
+      <origin
+        xyz="4.2538E-06 -0.0069222 -0.00057098"
+        rpy="0 0 0" />
+      <mass
+        value="0.4766" />
+      <inertia
+        ixx="0.00015516"
+        ixy="3.6222E-08"
+        ixz="-2.2637E-08"
+        iyy="0.00016365"
+        iyz="1.7685E-05"
+        izz="0.00019653" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Revolute_3"
+    type="revolute">
+    <origin
+      xyz="0 0 0.261299999999981"
+      rpy="0 0 0" />
+    <parent
+      link="Arm_Base_1" />
+    <child
+      link="Arm_Link_2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.141592653589793238462643383279"
+      upper="3.141592653589793238462643383279"
+      effort="19.49"
+      velocity="11.635411991" />
+  </joint>
+  <link
+    name="Arm_Link_3">
+    <inertial>
+      <origin
+        xyz="-1.497E-06 -0.080317 0.080704"
+        rpy="0 0 0" />
+      <mass
+        value="0.89601" />
+      <inertia
+        ixx="0.00034624"
+        ixy="-2.2594E-08"
+        ixz="3.6721E-08"
+        iyy="0.00037"
+        iyz="6.9023E-07"
+        izz="0.00035137" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Revolute_4"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Arm_Link_2" />
+    <child
+      link="Arm_Link_3" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.5707963268"
+      upper="1.5707963268"
+      effort="19.49"
+      velocity="11.635411991" />
+  </joint>
+  <link
+    name="Arm_Link_4">
+    <inertial>
+      <origin
+        xyz="1.0726E-06 -0.0014828 0.11435"
+        rpy="0 0 0" />
+      <mass
+        value="0.63094" />
+      <inertia
+        ixx="0.0002748"
+        ixy="4.8861E-10"
+        ixz="-2.2397E-10"
+        iyy="0.00025996"
+        iyz="2.8875E-06"
+        izz="0.00028216" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Revolute_5"
+    type="revolute">
+    <origin
+      xyz="0 0 0.171000000000001"
+      rpy="0 0 0" />
+    <parent
+      link="Arm_Link_3" />
+    <child
+      link="Arm_Link_4" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.3561944902"
+      upper="2.3561944902"
+      effort="5.75"
+      velocity="5.8643062867" />
+  </joint>
+  <link
+    name="Arm_Link_5">
+    <inertial>
+      <origin
+        xyz="-2.7538E-06 -0.071441 -0.0029845"
+        rpy="0 0 0" />
+      <mass
+        value="0.42648" />
+      <inertia
+        ixx="0.00017533"
+        ixy="-4.9868E-10"
+        ixz="4.3039E-11"
+        iyy="0.0001869"
+        iyz="1.6995E-05"
+        izz="0.00015773" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Arm_Link_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Revolute_6"
+    type="revolute">
+    <origin
+      xyz="0 0 0.171"
+      rpy="0 0 0" />
+    <parent
+      link="Arm_Link_4" />
+    <child
+      link="Arm_Link_5" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.0943951024" 
+      upper="1.5707963268"
+      effort="5.75"
+      velocity="5.8643062867" />
+      <!--lower原数值为-2.3561944902，即-135度，由于在这个角度时，最后关节拍子的旋转易卡住，因此修改为，即-120度-->
+  </joint>
+  <link
+    name="Racket_2">
+    <inertial>
+      <origin
+        xyz="-0.00076851 -6.356E-15 -0.00053005"
+        rpy="0 0 0" />
+      <mass
+        value="0.17116" />
+      <inertia
+        ixx="0.00052373"
+        ixy="3.2913E-12"
+        ixz="-6.2077E-20"
+        iyy="0.00027559"
+        iyz="-2.6906E-20"
+        izz="0.00024889" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://PingPong_Robot_Sim2Real/meshes/Racket.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.011"
+        rpy="1.5707963268 0 1.5707963268" />
+      <!--拍面圆柱体实际偏移1.1cm-->
+      <geometry>
+	<cylinder length="0.0162"radius="0.075"/>
+	<!--实际厚度1.42cm，半径14.8cm，仿真时各扩大2mm-->
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Revolute_7"
+    type="revolute">
+    <origin
+      xyz="0 -0.0792 0.117"
+      rpy="0 0 1.5707963268" />
+
+    <parent
+      link="Arm_Link_5" />
+    <child
+      link="Racket_1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.141592653589793238462643383279"
+      upper="3.141592653589793238462643383279"
+      effort="5.75"
+      velocity="5.8643062867" />
+  </joint>
+  <link
+    name="Racket_1">
+    <collision>
+      <origin
+        xyz="0 0 -0.011"
+        rpy="1.5707963268 0 1.5707963268" />
+      <!--拍面圆柱体实际偏移1.1cm-->
+      <geometry>
+	<cylinder length="0.0162"radius="0.075"/>
+	<!--实际厚度1.42cm，半径7.4cm，仿真时各扩大1mm-->
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Racket1_Racket2"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Racket_1" />
+    <child
+      link="Racket_2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
